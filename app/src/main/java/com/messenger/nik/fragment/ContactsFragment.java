@@ -294,6 +294,9 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
                         .setValue(rcModel);
 
                 storeGroupMemberInfo( vn );
+
+                //Subscribe to group virtual number to receive notifications
+                FirebaseMessaging.getInstance().subscribeToTopic(vn);
             } else {
                 Toasty.error(context, getString(R.string.enter_group_name_error), Toast.LENGTH_SHORT,true).show();
             }
@@ -371,6 +374,8 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
                                 .child(Constants.current_user_virtual_number)
                                 .child( groupVN )
                                 .setValue(rcModel).addOnSuccessListener(tResult -> {
+                                    //Subscribe to group virtual number to receive notifications
+                                    FirebaseMessaging.getInstance().subscribeToTopic(grpVn);
                                     handler.removeCallbacksAndMessages(null);
 
                                     storeGroupMemberInfo( groupVN );
@@ -501,7 +506,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
             databaseReference.child(Constants.CONTACTS_DB_PATH).child(getVirtualNumber).setValue(rcModel)
                     .addOnSuccessListener(unused -> updateAddPersonEditText(false));
 
-
+            //Subscribe to chat room id to receive notifications
             FirebaseMessaging.getInstance().subscribeToTopic(crID);
         } else {
             fetchUserDetails();

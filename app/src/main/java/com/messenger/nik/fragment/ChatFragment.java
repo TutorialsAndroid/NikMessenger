@@ -41,6 +41,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -333,6 +334,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseMessaging.getInstance().subscribeToTopic(chat_room_ID);
 
         //Initialize context
         context = requireContext();
@@ -552,9 +554,11 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                         add_person_to_contact_button.setVisibility(View.GONE));
     }
 
+    private String msg = null;
     private void messageType() {
         //check if write message edit text contains text or not
         if ( !write_message_edit_text.getText().toString().isEmpty() ) {
+            msg = write_message_edit_text.getText().toString();
             if (selected_tagged_message != null) {
                 //send the tagged message
                 sendMessage( sendTagMessageModel( write_message_edit_text.getText().toString() ) );
@@ -715,7 +719,9 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                     .child(Constants.current_user_virtual_number)
                     .setValue(rcModel);
 
-            new Thread(() -> sendNotification( Constants.current_user_name, "You have received a new message", chat_room_ID ));
+            new Thread(() -> sendNotification(
+                    Constants.current_user_name, msg, chat_room_ID )
+            ).start();
         } else {
             closeApp();
         }
@@ -1020,6 +1026,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
     }
 
     private void updateView() {
+        msg = null;
         //hide the gif view
         gifViewVisibility(false);
         //set the message edit-text to null
@@ -1218,6 +1225,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
         JSONObject jPayload = new JSONObject();
         JSONObject data = new JSONObject();
         try {
+            Log.d(TAG, "sending notification...");
+
             data.put("title", title);
             data.put("body", message);
 
