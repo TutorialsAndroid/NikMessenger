@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_view_title">25sp</dimen>
+    <dimen name="text_view_summary">23sp</dimen>
+
+    <dimen name="image_view_size">160dp</dimen>
+
+    <dimen name="login_progress_bar">50dp</dimen>
+
+    <dimen name="user_status_panel_height">100dp</dimen>
+    <dimen name="user_status_profile_photo">80dp</dimen>
+
+    <dimen name="fab_image_size">50dp</dimen>
+
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_20">30dp</dimen>
+
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+
+    <dimen name="elevation_5">5dp</dimen>
+</resources>

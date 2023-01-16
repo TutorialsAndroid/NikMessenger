@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:id="@+id/item_message_file_view_layout">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_message_file_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="@dimen/elevation_5"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/item_message_download_file_button"
+                android:layout_width="@dimen/image_view_button"
+                android:layout_height="@dimen/image_view_button"
+                android:layout_gravity="start|center"
+                android:layout_margin="@dimen/margin_10"
+                android:src="@drawable/ic_twotone_insert_file"
+                android:contentDescription="@null" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_view_summary"
+                android:textAlignment="viewStart"
+                android:gravity="start"
+                android:id="@+id/item_message_download_file_title"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF000000"
+    android:orientation="vertical">
+
+    <androidx.camera.view.PreviewView
+        android:layout_weight="1"
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@null"
+        android:importantForAccessibility="no"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:contentDescription="@null"
+        android:id="@+id/display_image"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/white"
+            app:useCompatPadding="true"
+            android:src="@drawable/ic_twotone_photo_camera_icon"
+            android:contentDescription="@string/capture_image"
+            android:id="@+id/capture_image"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/white"
+            app:useCompatPadding="true"
+            android:src="@drawable/ic_send_icon"
+            android:contentDescription="@string/send_image"
+            android:id="@+id/send_image"
+            android:visibility="gone"/>
+    </LinearLayout>
+</LinearLayout>

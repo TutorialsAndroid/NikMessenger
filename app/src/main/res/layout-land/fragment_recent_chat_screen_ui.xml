@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green_41c"
+        android:id="@+id/recent_chats_toolbar_view">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10"
+                android:layout_gravity="center"
+                android:text="@string/app_name"
+                android:textSize="@dimen/text_view_summary"
+                android:textColor="@color/white"
+                android:fontFamily="@font/leckerli_font_regular"/>
+
+            <ImageView
+                android:layout_width="@dimen/image_view_button"
+                android:layout_height="@dimen/image_view_button"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_10"
+                android:src="@drawable/ic_twotone_person_icon"
+                android:contentDescription="@string/my_profile"
+                android:id="@+id/user_profile_button"/>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/user_status_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_status_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|none"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <RelativeLayout
+            android:id="@+id/no_recent_chats_found_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/no_recent_chats_found_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/margin_10"
+                android:gravity="center"
+                android:text="@string/no_recent_chats_found"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_view_title" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recent_chats_recycler_view"
+            android:visibility="gone"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:useCompatPadding="true"
+            app:elevation="@dimen/elevation_5"
+            android:src="@drawable/ic_message_icon"
+            app:tint="@color/white"
+            android:id="@+id/add_message_button"
+            android:contentDescription="@string/add_message_button"/>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/shadow_line"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_20"
+        android:background="@drawable/custom_edit_text"
+        android:hint="@string/enter_virtual_number"
+        android:id="@+id/add_person_edit_text"
+        android:visibility="gone"/>
+
+</LinearLayout>

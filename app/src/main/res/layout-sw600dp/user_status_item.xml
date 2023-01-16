@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_10">
+
+    <ImageView
+        android:layout_width="@dimen/user_status_profile_photo"
+        android:layout_height="@dimen/user_status_profile_photo"
+        android:layout_margin="@dimen/margin_10"
+        android:contentDescription="@null"
+        android:id="@+id/user_status_item"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_status_item"
+        android:layout_centerInParent="true"
+        android:layout_margin="2dp"
+        android:maxLength="13"
+        android:id="@+id/user_status_item_name"/>
+
+</RelativeLayout>

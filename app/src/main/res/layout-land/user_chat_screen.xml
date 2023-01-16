@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    android:id="@+id/user_chat_screen_layout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_10"
+        android:background="@color/green_41c"
+        android:id="@+id/custom_toolbar_panel_view">
+        <ImageView
+            android:layout_width="@dimen/image_view_button"
+            android:layout_height="@dimen/image_view_button"
+            android:layout_margin="@dimen/margin_10"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back_icon"
+            android:id="@+id/custom_toolbar_back_button"
+            android:contentDescription="@null"/>
+
+        <ImageView
+            android:layout_width="@dimen/user_profile_photo_size"
+            android:layout_height="@dimen/user_profile_photo_size"
+            android:layout_gravity="center"
+            android:id="@+id/user_chat_screen_user_profile_photo"
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_view_title"
+            android:maxLength="8"
+            android:id="@+id/user_chat_screen_user_name"
+            android:contentDescription="@null"/>
+
+        <ImageView
+            android:layout_width="@dimen/image_view_button"
+            android:layout_height="@dimen/image_view_button"
+            android:layout_margin="@dimen/margin_10"
+            android:layout_gravity="end|center"
+            android:src="@drawable/ic_twotone_person_add"
+            android:id="@+id/add_person_to_contact_button"
+            android:contentDescription="@string/add_person_to_contact"
+            app:tint="@color/white"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="@dimen/image_view_button"
+            android:layout_height="@dimen/image_view_button"
+            android:layout_margin="@dimen/margin_10"
+            android:layout_gravity="end|center"
+            android:src="@drawable/ic_twotone_insert_file"
+            android:id="@+id/send_file_button"
+            android:contentDescription="@string/send_file"
+            app:tint="@color/white"
+            android:visibility="visible"/>
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:id="@+id/file_download_progress_bar"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <RelativeLayout
+            android:id="@+id/no_chats_found_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/no_chats_found_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/margin_10"
+                android:gravity="center"
+                android:text="@string/no_messages_here_yet"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_view_title" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_chat_screen_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"/>
+    </FrameLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:background="@drawable/shadow_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/tag_message_view"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:src="@drawable/ic_close_icon"
+            android:id="@+id/close_tag_message_view"
+            app:tint="@color/green_41c"
+            android:contentDescription="@string/close_tag_message"/>
+
+        <TextView
+            android:id="@+id/tag_message_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_10"
+            android:textSize="@dimen/text_view_summary"
+            android:singleLine="false"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:textColor="@android:color/secondary_text_dark_nodisable"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/image_view_button"
+            android:layout_height="@dimen/image_view_button"
+            android:src="@drawable/ic_gif_icon"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_10"
+            android:id="@+id/send_gif_button"
+            android:contentDescription="@string/send_gif"
+            app:tint="@color/green_47c" />
+
+        <EditText
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_20"
+            android:layout_gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="text|textMultiLine"
+            android:maxLines="5"
+            android:hint="@string/write_message"
+            android:background="@drawable/custom_edit_text"
+            android:id="@+id/write_message_edit_text"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:layout_width="@dimen/image_view_button"
+            android:layout_height="@dimen/image_view_button"
+            android:src="@drawable/ic_send_icon"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_10"
+            android:id="@+id/send_message_button"
+            android:contentDescription="@string/send_message"
+            app:tint="@color/green_47c" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="-1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/user_chat_gif_view"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_close_icon"
+                android:id="@+id/close_gif_view_button"
+                android:contentDescription="@null"/>
+
+            <EditText
+                android:layout_weight="1"
+                android:background="@drawable/custom_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10"
+                android:padding="@dimen/padding_10"
+                android:hint="@string/search_gif"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:id="@+id/search_gif_edit_text"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_search_icon"
+                android:id="@+id/search_gif_button"
+                android:contentDescription="@null"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/user_chat_gif_recycler_view"/>
+
+        <ProgressBar
+            android:id="@+id/loading_gif_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+</LinearLayout>

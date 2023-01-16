@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">Nik</string>
+
+    <!-- Fragment Login Strings -->
+    <string name="agree_and_continue_button">Agree and Continue</string>
+    <string name="accept_terms_and_privacy_title">I Accept</string>
+    <string name="accept_terms_and_privacy_msg">By continue use of the app. You accept to our T&amp;C and Privacy Policy of the Nik Messenger</string>
+
+    <!-- Fragment VNG Strings -->
+    <string name="virtual_number_summary">Your virtual number is ready. Share this number with your friends to start a chat on Nik</string>
+    <string name="virtual_number_set_done">virtual number set done</string>
+    <string name="your_virtual_number_is">\"Your virtual number is \"</string>
+
+    <!-- Fragment RCS Strings -->
+    <string name="add_message_button">Add a new message</string>
+    <string name="no_recent_chats_found">No recent chats found</string>
+    <string name="no_message_found">No message found</string>
+    <string name="my_profile">my profile</string>
+
+    <!-- Fragment Chat Strings -->
+    <string name="no_messages_here_yet">No messages here yet</string>
+    <string name="write_message">Write Message…</string>
+    <string name="send_message">Send message</string>
+    <string name="send_gif">send GIF</string>
+    <string name="close_tag_message">close tag message</string>
+    <string name="search_gif">Search GIF…</string>
+    <string name="send_file">send file</string>
+    <string name="requesting_file">Requesting File</string>
+    <string name="requesting_file_summary">is requesting file that was recently sent. Click on allow so that</string>
+    <string name="requesting_file_summary2">can view sent file</string>
+    <string name="allow_file">Allow</string>
+    <string name="file_is_downloading">File is downloading…</string>
+    <string name="download_filed_deleted">Download File Deleted</string>
+    <string name="error_code_282">Error Code: 282</string>
+    <string name="create_alert_rec_summary">Please wait while</string>
+    <string name="create_alert_rec_summary2">responds to your request</string>
+    <string name="file_rec_alert_summary3">accepted your request</string>
+    <string name="deny_request_summary">denied your request</string>
+    <string name="cancel_request_file">Cancel Request</string>
+    <string name="file_alert_summary3">Is requesting file that is sent in this chat. Click allow so that</string>
+    <string name="allow">Allow</string>
+    <string name="file_alert_summary4">can download file</string>
+    <string name="file_upload_failed">Upload Failed</string>
+    <string name="give_permission_title">Give Permissions</string>
+    <string name="give_permission_summary">To send file you must give permissions to app. Click allow to give required permissions to app</string>
+    <string name="file_download_summary">Has allowed you to download file. Do you want to download file now?</string>
+    <string name="file_download_summary2">Has denied your request to download file. Do you want request it again. Or cancel the request</string>
+    <string name="download_file">Download Now</string>
+    <string name="request_again">Request again</string>
+
+    <!-- Fragment Contacts String -->
+    <string name="no_contacts_found">No contacts found</string>
+    <string name="enter_virtual_number">Enter virtual number</string>
+    <string name="add_new_person">Add new person</string>
+    <string name="cancel_add_person">Cancel add person</string>
+    <string name="done_adding_person">Done adding person</string>
+    <string name="add_person_to_contact">add person to contact</string>
+    <string name="enter_virtual_number_summary">Add person by entering his/her virtual number.</string>
+    <string name="select_contact">Select Contact</string>
+    <string name="create_group">Create Group</string>
+    <string name="join_group">join group</string>
+    <string name="create">Create</string>
+    <string name="enter_group_name_error">Please enter group name</string>
+    <string name="user_not_exit_error">User doesn\'t exit…</string>
+    <string name="join_group_dialog">Join Group</string>
+    <string name="join_group_message_dialog">Enter the group virtual number to join the group</string>
+    <string name="enter_group_vn_error">Please enter group VN</string>
+    <string name="group_does_not_exits_error">Group doesn\'t exits</string>
+
+    <!-- Activity Set-up User Profile Strings  -->
+    <string name="enter_user_name">Enter user-name</string>
+    <string name="done_adding_user_name">done adding user name</string>
+    <string name="enter_user_name_summary">Enter your user-name so that your friends can identify you by your name.</string>
+
+    <!-- Fragment User Profile Strings -->
+    <string name="share_quick_status">Share Quick Status</string>
+    <string name="app_info">App Info</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="report_problem">Report Problem</string>
+    <string name="give_permission_title_profile">Give Permissions</string>
+    <string name="give_permission_summary_profile">To share quick status you must give storage permission. Without storage permissions you can\'t access to this feature</string>
+    <string name="something_went_wrong_profile">Something went wrong…</string>
+    <string name="quick_failed_to_upload">Quick Status failed to upload</string>
+
+    <!-- Fragment Camera Strings -->
+    <string name="capture_image">capture image</string>
+    <string name="send_image">send image</string>
+    <string name="image_captured">Image Captured successfully</string>
+    <string name="status_sent">Status sent</string>
+    <string name="permissions_required">Permissions Required</string>
+    <string name="permissions_required_summary">To share quick status you must give the permissions that are being asked. Click Allow to continue with permissions</string>
+    <string name="allow_permissions">Allow</string>
+    <string name="something_went_wrong_permissions">Something went wrong</string>
+
+    <!-- Create group dialog -->
+    <string name="enter_group_name">Enter Group Name</string>
+
+    <!-- Profile info strings -->
+    <string name="information">Information</string>
+
+    <!-- Join group dialog -->
+    <string name="enter_group_vn">Enter Group VN</string>
+
+    <!-- PUBLIC STRINGS -->
+    <string name="something_went_wrong_error">Something went wrong…</string>
+
+</resources>

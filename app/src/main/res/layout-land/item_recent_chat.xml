@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recent_chat_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/recent_chat_user_profile_photo"
+                android:layout_width="@dimen/user_profile_photo_size"
+                android:layout_height="@dimen/user_profile_photo_size"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:contentDescription="@null"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/recent_chat_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/recent_chat_user_profile_photo"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginStart="@dimen/margin_10"
+                android:text="@string/app_name"
+                android:textSize="@dimen/text_view_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/recent_chat_user_profile_photo"
+                android:layout_below="@+id/recent_chat_user_name"
+                android:text="@string/no_message_found"
+                android:textSize="@dimen/text_view_summary"
+                android:id="@+id/recent_chat_last_message"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/new_message_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_new_message_indicator_icon"
+                android:visibility="gone"
+                app:tint="@color/green_47c" />
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>
