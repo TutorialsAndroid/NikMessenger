@@ -102,6 +102,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
     private static String selected_file_type = null;
     private static String chat_room_ID = null;
     private static String group_vn = null;
+    private String Notification_key = null;
     private static boolean isActiveDownload = false;
 
     //UI COMPONENTS
@@ -334,7 +335,9 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseMessaging.getInstance().subscribeToTopic(chat_room_ID);
+        //TODO Notification_key is null
+        Log.d(TAG, Notification_key);
+        FirebaseMessaging.getInstance().subscribeToTopic(Notification_key);
 
         //Initialize context
         context = requireContext();
@@ -534,6 +537,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                     group_vn,
                     Calendar.getInstance().getTime().getTime()+"",
                     chat_room_ID,
+                    Notification_key,
                     null
             );
         } else {
@@ -545,6 +549,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                     null,
                     Calendar.getInstance().getTime().getTime()+"",
                     chat_room_ID,
+                    Notification_key,
                     null
             );
         }
@@ -582,7 +587,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                 getGroupMembers();
             } else {
                 senderPush( senderModel() );
-                receiverPush( receiverModel() );
+                receiverPush( receiverModel(), 1 );
             }
 
             updateView();
@@ -632,6 +637,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                 null,
                 Calendar.getInstance().getTime().getTime()+"",
                 chat_room_ID,
+                Notification_key,
                 null
         );
     }
@@ -644,6 +650,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                 group_vn,
                 Calendar.getInstance().getTime().getTime()+"",
                 chat_room_ID,
+                Notification_key,
                 null
         );
     }
@@ -686,6 +693,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                 null,
                 Calendar.getInstance().getTime().getTime()+"",
                 chat_room_ID,
+                Notification_key,
                 null
         );
     }
@@ -712,16 +720,29 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
         }
     }
 
-    private void receiverPush(RCModel rcModel) {
+    private void receiverPush(RCModel rcModel, int type) {
         if ( Constants.current_user_virtual_number != null && other_user_virtual_number !=null ) {
             databaseReference.child(Constants.DB_MAIN)
                     .child(other_user_virtual_number)
                     .child(Constants.current_user_virtual_number)
                     .setValue(rcModel);
 
-            new Thread(() -> sendNotification(
-                    Constants.current_user_name, msg, chat_room_ID )
-            ).start();
+            if (type == 1) { //It is gif handle notification logic
+                Log.d(TAG, "GIF");
+                new Thread(() -> sendNotification(
+                        Constants.current_user_name, "Sent you GIF", Notification_key )
+                ).start();
+            } else if (type == 2) { //It is normal message handle notification logic
+                Log.d(TAG, "MSG");
+                new Thread(() -> sendNotification(
+                        Constants.current_user_name, msg, Notification_key )
+                ).start();
+            } else if (type == 3) { //It is a file handle notification logic
+                Log.d(TAG, "File");
+                new Thread(() -> sendNotification(
+                        Constants.current_user_name, "Sent you file", Notification_key )
+                ).start();
+            }
         } else {
             closeApp();
         }
@@ -738,7 +759,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
         );
     }
 
-    private void downloadFile() {
+    public void downloadFile() {
         if ( selected_file_url != null ) {
             //show the progress bar when download starts
             if (download_file_progress_bar != null) {
@@ -768,13 +789,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
 
                 //remove the download request so that it can handle new download
                 //request to
-                if (isActiveDownload) {
+//                if (isActiveDownload) {
                     //hide the progress bar when downloads get completes
                     download_file_progress_bar.setVisibility(View.GONE);
 
                     openFile(); //open the file on download success
-                    removeDownload();
-                }
+                    //removeDownload();
+//                }
             }).addOnFailureListener(exception ->
                     Log.e(TAG,"file not downloaded" +exception.toString())
             ).addOnProgressListener(taskSnapshot -> {
@@ -816,7 +837,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                 getGroupMembers();
             } else {
                 senderPush( senderModel() );
-                receiverPush( receiverModel() );
+                receiverPush( receiverModel(), 2 );
             }
         } else { closeApp(); }
     }
@@ -834,7 +855,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
                 getGroupMembers();
             } else {
                 senderPush( senderModel() );
-                receiverPush( receiverModel() );
+                receiverPush( receiverModel(),3 );
             }
         } else { closeApp(); }
     }
@@ -991,12 +1012,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
      * @param name of the user
      * @param number of the user
      */
-    protected void receivedData(String name, String avatar, String number, String groupVn, String crId) {
+    protected void receivedData(String name, String avatar, String number, String groupVn, String crId, String Notification_key) {
             other_user_name = name;
             other_user_avatar = avatar;
             other_user_virtual_number = number;
             group_vn = groupVn;
             chat_room_ID = crId;
+            this.Notification_key = Notification_key;
     }
 
     private void checkUserExitInContacts() {
@@ -1234,7 +1256,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
             jPayload.put("to", "/topics/" + crID);
 
             jPayload.put("priority", "high");
-            jPayload.put("time_to_live",0);
+            jPayload.put("time_to_live",60);
             jPayload.put("data", data);
             //jPayload.put("notification", data);
 

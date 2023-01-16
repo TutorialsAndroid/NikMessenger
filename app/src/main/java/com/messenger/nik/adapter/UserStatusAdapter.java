@@ -1,5 +1,7 @@
 package com.messenger.nik.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.messenger.nik.R;
+import com.messenger.nik.activity.UserStatusViewActivity;
 import com.messenger.nik.models.UserStatus;
 
 public class UserStatusAdapter extends FirebaseRecyclerAdapter<UserStatus, UserStatusAdapter.CustomViewHolder> {
@@ -22,12 +25,15 @@ public class UserStatusAdapter extends FirebaseRecyclerAdapter<UserStatus, UserS
     //CONSTANT
     private static final String TAG = UserStatusAdapter.class.getSimpleName();
 
+    private Context context;
+
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
      */
-    public UserStatusAdapter(@NonNull FirebaseRecyclerOptions<UserStatus> options) {
+    public UserStatusAdapter(@NonNull FirebaseRecyclerOptions<UserStatus> options, Context context) {
         super(options);
+        this.context = context;
     }
 
 
@@ -63,6 +69,10 @@ public class UserStatusAdapter extends FirebaseRecyclerAdapter<UserStatus, UserS
             final UserStatus model = getItem(position);
 
             if ( v  == user_status_image ) {
+                Intent intent = new Intent(context, UserStatusViewActivity.class);
+                intent.putExtra("status_url", model.getStatus_url());
+                context.startActivity(intent);
+
                 Log.i(TAG, model.getStatus_url() );
                 Log.i(TAG, model.getVn() );
             }

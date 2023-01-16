@@ -145,6 +145,8 @@ public class SetUpUserActivity extends AppCompatActivity {
         String date_joined = Calendar.getInstance().getTime().getTime()+"";
         String avatar = "https://api.multiavatar.com/"+userName+".png";
 
+        String notification_key = databaseReference.push().getKey();
+
         //Get the value from shared preference and store it in string
         Constants.current_user_virtual_number = Util.getValueFromSharedPreferences( context, "virtual_number" );
 

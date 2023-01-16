@@ -8,17 +8,19 @@ public class RCModel {
     private String groupVn;
     private String timeStamp;
     private String crID; //chat room ID
+    private String notification_key;
     private ChatModel chatModel;
 
     public RCModel() {}
 
-    public RCModel(String name, String avatar, String vn, String groupVn, String timeStamp, String crID, ChatModel chatModel) {
+    public RCModel(String name, String avatar, String vn, String groupVn, String timeStamp, String crID, String notification_key, ChatModel chatModel) {
         this.name = name;
         this.avatar = avatar;
         this.vn = vn;
         this.groupVn = groupVn;
         this.timeStamp = timeStamp;
         this.crID = crID;
+        this.notification_key = notification_key;
         this.chatModel = chatModel;
     }
 
@@ -76,5 +78,13 @@ public class RCModel {
 
     public void setGroupVn(String groupVn) {
         this.groupVn = groupVn;
+    }
+
+    public String getNotification_key() {
+        return notification_key;
+    }
+
+    public void setNotification_key(String notification_key) {
+        this.notification_key = notification_key;
     }
 }

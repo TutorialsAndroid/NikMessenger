@@ -93,7 +93,8 @@ public class RCSAdapter extends FirebaseRecyclerAdapter<RCModel, RCSAdapter.Cust
                         model.getAvatar(),
                         model.getVn(),
                         model.getGroupVn(),
-                        model.getCrID()
+                        model.getCrID(),
+                        model.getNotification_key()
                 );
 
                 //Load the chat fragment

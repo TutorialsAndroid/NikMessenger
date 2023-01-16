@@ -3,6 +3,7 @@ package com.messenger.nik.helper;
 import static com.messenger.nik.helper.Constants.SP;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,6 +22,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.messenger.nik.R;
 import com.messenger.nik.Splash;
 
+import java.util.List;
 import java.util.Random;
 
 public class AppFirebaseMessagingService extends FirebaseMessagingService {
@@ -42,8 +44,9 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
+            Log.d(TAG, "onMessageReceived");
             //If app is in background then show notification
-//            if (!isAppIsInBackground(getApplicationContext())) {
+            if (!isAppIsInBackground(getApplicationContext())) {
                 //App is in background so show notification
                 Object msgTitle = remoteMessage.getData().get("title"); //get the title of notification as object
                 Object msgBody = remoteMessage.getData().get("body"); //get the body of notification as object
@@ -54,7 +57,7 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
                     //Now show the notification
                     FCMNotification(getApplicationContext(), title, body);
                 }
-//            }
+            }
         }
     }
 
@@ -76,7 +79,7 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
         notificationBuilder.setContentTitle(title);
         notificationBuilder.setContentText(messageBody);
         notificationBuilder.setAutoCancel(true);
-        notificationBuilder.setGroup("com.asm.heatic.NOTIFICATIONS_GROUP");
+        notificationBuilder.setGroup("com.messenger.nik.NOTIFICATIONS_GROUP");
         notificationBuilder.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY);
 
         notificationBuilder.setContentIntent(pendingIntent);
@@ -89,7 +92,7 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelID,
-                    "heatic_app_notification", NotificationManager.IMPORTANCE_DEFAULT);
+                    "nik_app_notification", NotificationManager.IMPORTANCE_DEFAULT);
 
             NotificationCompat.Builder notificationBuilder1 =
                     new NotificationCompat.Builder(context, channelID);
@@ -97,7 +100,7 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
             notificationBuilder1.setContentTitle(title);
             notificationBuilder1.setContentText(messageBody);
             notificationBuilder1.setAutoCancel(true);
-            notificationBuilder1.setGroup("com.asm.heatic.NOTIFICATIONS_GROUP");
+            notificationBuilder1.setGroup("com.messenger.nik.NOTIFICATIONS_GROUP");
             notificationBuilder1.setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY);
 
             notificationBuilder1.setContentIntent(pendingIntent);
@@ -117,5 +120,27 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
             randomStringBuilder.append(tempChar);
         }
         return randomStringBuilder.toString();
+    }
+
+    private boolean isAppIsInBackground(Context context) {
+        boolean isInBackground = true;
+        ActivityManager am = (ActivityManager) context.getSystemService
+                (Context.ACTIVITY_SERVICE);
+
+        assert am != null;
+        List<ActivityManager.RunningAppProcessInfo>
+                runningProcesses = am.getRunningAppProcesses();
+
+        for (ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
+            if (processInfo.importance ==
+                    ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                for (String activeProcess : processInfo.pkgList) {
+                    if (activeProcess.equals(context.getPackageName())) {
+                        isInBackground = false;
+                    }
+                }
+            }
+        }
+        return !isInBackground;
     }
 }

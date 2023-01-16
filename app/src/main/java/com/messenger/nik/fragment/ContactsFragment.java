@@ -53,6 +53,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
     private static final String TAG = RCSFragment.class.getSimpleName();
     private static String another_user_name = null;
     private static String another_user_avatar = null;
+    private static String another_user_notification_key = null;
     private static String groupName = null;
     private static String avatar = null;
     private static String grpVn = null;
@@ -273,6 +274,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
             if ( !groupName.isEmpty() ) {
                 String avatar = "https://api.multiavatar.com/"+groupName+".png";
                 String vn = generateGroupVirtualNumber();
+                String Notification_key = vn + generateRandomString();
 
                 RCModel rcModel = new RCModel(
                         groupName,
@@ -281,6 +283,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
                         vn,
                         Calendar.getInstance().getTime().getTime()+"",
                         generateRandomString(),
+                        Notification_key,
                         null
                 );
 
@@ -305,6 +308,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
         dialogBuilder.show();
     }
 
+    private String Notification_key = null;
     private void joinGroup() {
         View customAlertDialogView = LayoutInflater.from( context ).inflate( R.layout.join_group_dialog, null, false );
 
@@ -346,6 +350,9 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
                                 if ( "vn".equals( data.getKey() ) ) {
                                     vn = String.valueOf( data.getValue() );
                                 }
+                                if ("notification_key".equals( data.getKey() )) {
+                                    Notification_key = String.valueOf( data.getValue() );
+                                }
                             }
                         } else {
                             Toasty.error(context, getString(R.string.group_does_not_exits_error), Toast.LENGTH_SHORT, true).show();
@@ -359,7 +366,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
 
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
-                    if ( groupName != null && avatar != null && grpVn != null && crID != null && vn != null ) {
+                    if ( groupName != null && avatar != null && grpVn != null && crID != null && vn != null && Notification_key != null) {
                         RCModel rcModel = new RCModel(
                                 groupName,
                                 avatar,
@@ -367,6 +374,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
                                 grpVn,
                                 Calendar.getInstance().getTime().getTime()+"",
                                 crID,
+                                Notification_key,
                                 null
                         );
 
@@ -492,6 +500,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
             //Get the virtual number from edit text and store it in string format
             String getVirtualNumber = add_person_edit_text.getText().toString();
             String crID = generateRandomString();
+            String NotificationKey = getVirtualNumber + crID.trim();
 
             RCModel rcModel = new RCModel(
                     name,
@@ -500,6 +509,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
                     null,
                     Calendar.getInstance().getTime().getTime()+"",
                     crID,
+                    NotificationKey,
                     null
             );
 
@@ -530,8 +540,8 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
      * @param user_virtual_number number of the chat user
      */
     @Override
-    public void data(String user_name, String user_avatar, String user_virtual_number, String group_vn, String crID) {
+    public void data(String user_name, String user_avatar, String user_virtual_number, String group_vn, String crID, String Notification_key) {
         ChatFragment chatFragment = new ChatFragment();
-        chatFragment.receivedData(user_name, user_avatar, user_virtual_number, group_vn, crID);
+        chatFragment.receivedData(user_name, user_avatar, user_virtual_number, group_vn, crID, Notification_key);
     }
 }

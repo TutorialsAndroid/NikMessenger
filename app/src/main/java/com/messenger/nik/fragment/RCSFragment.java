@@ -155,7 +155,7 @@ public class RCSFragment extends Fragment implements View.OnClickListener, RCSUs
         FirebaseRecyclerOptions<UserStatus> userStatusFirebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<UserStatus>()
                 .setQuery(userStatusQuery, UserStatus.class).setLifecycleOwner(this).build();
 
-        usAdapter = new UserStatusAdapter( userStatusFirebaseRecyclerOptions );
+        usAdapter = new UserStatusAdapter( userStatusFirebaseRecyclerOptions, requireContext() );
 
         userStatusDataObserver = new RecyclerView.AdapterDataObserver() {
             @Override
@@ -251,9 +251,9 @@ public class RCSFragment extends Fragment implements View.OnClickListener, RCSUs
      * @param user_virtual_number number of the chat user
      */
     @Override
-    public void data(String user_name, String user_avatar, String user_virtual_number, String groupVn, String crID) {
+    public void data(String user_name, String user_avatar, String user_virtual_number, String groupVn, String crID, String Notification_key) {
         ChatFragment chatFragment = new ChatFragment();
-        chatFragment.receivedData(user_name, user_avatar, user_virtual_number, groupVn, crID);
+        chatFragment.receivedData(user_name, user_avatar, user_virtual_number, groupVn, crID, Notification_key);
     }
 
     private void fetchCurrentProfileDetails() {
