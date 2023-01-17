@@ -25,6 +25,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -88,6 +89,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
     //CONSTANTS
     private static final String TAG = ChatFragment.class.getSimpleName();
     private static final String[] REQUIRED_PERMISSIONS = new String[] {
+            Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
@@ -165,6 +167,15 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
             showPermissionRationale();
         } else {
             fileResultLauncher.launch("*/*");
+        }
+    });
+    private final ActivityResultLauncher<String[]> permissionFileViewResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+        if (result.containsValue(false)) {
+            showPermissionRationale2();
+        } else if ( shouldShowRequestPermissionRationale( Manifest.permission.WRITE_EXTERNAL_STORAGE ) || shouldShowRequestPermissionRationale( Manifest.permission.READ_EXTERNAL_STORAGE ) ){
+            showPermissionRationale2();
+        } else {
+            downloadFile();
         }
     });
 
@@ -528,6 +539,18 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
         dialogBuilder.show();
     }
 
+    private void showPermissionRationale2() {
+        MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder( requireContext() );
+        dialogBuilder.setTitle( getString( R.string.give_permission_title ) );
+        dialogBuilder.setMessage( "To download file please give permissions. Click ALLOW to give permissions" );
+        dialogBuilder.setPositiveButton(R.string.allow_permissions, (dialog, which) -> {
+            dialog.dismiss();
+            permissionFileViewResultLauncher.launch( REQUIRED_PERMISSIONS );
+        });
+        dialogBuilder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss());
+        dialogBuilder.show();
+    }
+
     private void addUserToContacts() {
         RCModel rcModel;
 
@@ -842,6 +865,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Chat
     private void openFile() {
         try { FileOpen.openFile(context,localFile); }
         catch (IOException e) { e.printStackTrace(); }
+    }
+
+    public void permissions() {
+        permissionFileViewResultLauncher.launch(REQUIRED_PERMISSIONS);
     }
 
     /*

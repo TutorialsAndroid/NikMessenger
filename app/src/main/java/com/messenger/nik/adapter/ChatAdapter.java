@@ -158,7 +158,7 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<ChatModel, ChatAdapter.
             }
             if (v == item_message_download_file_button) {
                 cd.data(null,null,model.getFileModel().getUrl(),model.getFileModel().getType());
-                ChatFragment.get().downloadFile();
+                ChatFragment.get().permissions();//ask permission before downloading file
             }
         }
 
