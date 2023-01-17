@@ -20,6 +20,7 @@ Nik is an secured messenger built using firebase realtime database.
 ### 1. User Registration
 - The first step when user create account it generates a virtual number randomly and the generated number is cross-checked weather the number was generated perviously or not. If number was not generated then it will continue to create user profile.
 - The second step it ask user to enter username after entering username it stores the information in firebase realtime database.
+- Please note : For security reason once the virtual number generated it is not given to any one else. It's unique for you. And if you accidentally delete the app then you will lost all chats and data. You can't logic back again.
 ### 2. Adding Contacts
 - The process of adding contacts is very simple.
 - First the person has to enter the virtual number of that person whom he wants to add.
