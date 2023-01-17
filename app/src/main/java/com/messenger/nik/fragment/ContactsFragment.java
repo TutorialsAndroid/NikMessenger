@@ -35,6 +35,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.messenger.nik.R;
+import com.messenger.nik.activity.FragmentLoadActivity;
 import com.messenger.nik.adapter.RCSAdapter;
 import com.messenger.nik.helper.Constants;
 import com.messenger.nik.customInterface.RCSUserData;
@@ -517,7 +518,7 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
                     .addOnSuccessListener(unused -> updateAddPersonEditText(false));
 
             //Subscribe to chat room id to receive notifications
-            FirebaseMessaging.getInstance().subscribeToTopic(crID);
+            //FirebaseMessaging.getInstance().subscribeToTopic(crID);
         } else {
             fetchUserDetails();
         }
@@ -543,5 +544,8 @@ public class ContactsFragment extends Fragment implements View.OnClickListener, 
     public void data(String user_name, String user_avatar, String user_virtual_number, String group_vn, String crID, String Notification_key) {
         ChatFragment chatFragment = new ChatFragment();
         chatFragment.receivedData(user_name, user_avatar, user_virtual_number, group_vn, crID, Notification_key);
+
+        //Load the chat fragment
+        FragmentLoadActivity.get().loadFragment(chatFragment, "ChatFragment");
     }
 }

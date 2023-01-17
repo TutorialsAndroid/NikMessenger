@@ -47,6 +47,7 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "onMessageReceived");
             //If app is in background then show notification
             if (!isAppIsInBackground(getApplicationContext())) {
+                Log.d(TAG, "App is in background");
                 //App is in background so show notification
                 Object msgTitle = remoteMessage.getData().get("title"); //get the title of notification as object
                 Object msgBody = remoteMessage.getData().get("body"); //get the body of notification as object
@@ -54,9 +55,14 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
                 if (msgTitle != null && msgBody != null) {
                     String title = String.valueOf(msgTitle);  //convert and store notification title in string
                     String body = String.valueOf(msgBody); //convert and store notification body in string
+                    Log.d(TAG, title + " :: " + body);
                     //Now show the notification
                     FCMNotification(getApplicationContext(), title, body);
+                } else {
+                    Log.d(TAG, "msgTitle or msgBody was null");
                 }
+            } else {
+                Log.d(TAG, "App is in foreground");
             }
         }
     }

@@ -87,6 +87,11 @@ public class RCSAdapter extends FirebaseRecyclerAdapter<RCModel, RCSAdapter.Cust
             final RCModel model = getItem(position);
 
             if (v == recent_chat_view) {
+                if (model.getNotification_key() != null) {
+                    Log.d(TAG, model.getNotification_key());
+                } else {
+                    Log.d(TAG, "notification key was null");
+                }
                 //pass the user data to interface so we can use it later on chat fragment
                 RCSUserData.data(
                         model.getName(),
@@ -96,9 +101,6 @@ public class RCSAdapter extends FirebaseRecyclerAdapter<RCModel, RCSAdapter.Cust
                         model.getCrID(),
                         model.getNotification_key()
                 );
-
-                //Load the chat fragment
-                FragmentLoadActivity.get().loadFragment(new ChatFragment(), "ChatFragment");
             }
         }
 

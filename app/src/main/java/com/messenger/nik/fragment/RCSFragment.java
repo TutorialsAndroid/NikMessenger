@@ -254,6 +254,8 @@ public class RCSFragment extends Fragment implements View.OnClickListener, RCSUs
     public void data(String user_name, String user_avatar, String user_virtual_number, String groupVn, String crID, String Notification_key) {
         ChatFragment chatFragment = new ChatFragment();
         chatFragment.receivedData(user_name, user_avatar, user_virtual_number, groupVn, crID, Notification_key);
+        //Load the chat fragment
+        FragmentLoadActivity.get().loadFragment(chatFragment, "ChatFragment");
     }
 
     private void fetchCurrentProfileDetails() {
