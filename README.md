@@ -1,4 +1,4 @@
-#Download APK [[Click here to download app]](https://mega.nz/file/8plnFRJR#pZTpilb1yiIuUVis9gO_WlCCU9-zfQkHJC8W36qyyIM)
+#Download APK [[Click here to download app]](https://mega.nz/file/k5FhmT4A#8ZUq3MdhyHAxw83XBjjW5uSV7K9tHZ_tlq_a5B_FY4Q)
 
 
 # Nik Messenger
