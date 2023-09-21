@@ -15,7 +15,8 @@
 
     <!-- Camera permission to click photos for status sharing -->
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera2"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera2" android:required="false"/>
 
     <application
         android:name="com.messenger.nik.App"
