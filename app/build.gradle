@@ -55,7 +55,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.2.1'
     implementation 'com.google.firebase:firebase-database:20.2.2'
     implementation 'com.firebaseui:firebase-ui-database:8.0.2'
-    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.firebase:firebase-messaging:23.2.1'
 
     //GLIDE IMAGE LOADING LIBRARY
     implementation 'com.github.bumptech.glide:glide:4.12.0'
